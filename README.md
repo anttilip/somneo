@@ -74,6 +74,18 @@ data:
 ```
 The source is `wake-up` for the wake-up sounds, `radio` for the FM radio of `off` for no sound. If the wake-up sound is selected, channel is one of the following sounds: `forest birds`, `summer birds`, `morning alps`, `yoga harmony`, `nepal bowls`, `summer lake` or `ocean waves`. If the radio is selected, channel has a value 1 till 5 (formatted as a string). The level should be between 1 and 25.
 
+PowerWake can be set for an alarm with:
+```
+service: somneo.set_powerwake
+target:
+  entity_id: switch.somneo_alarm0
+data:
+  state: on
+  delta: 10
+```
+State is either `on` or `off`, and determines whether PowerWake is enabled or disabled for the alarm.
+The delay in minutes between alarm start and PowerWake is configured with `delta`. Delta should be between 0 and 59. Setting `delta` to 0 will start PowerWake immediately when alarm starts.
+
 Furthermore, alarms can be added to or removed from the list in the Somneo app with:
 ```
 service: somneo.add_alarm

@@ -73,6 +73,15 @@ async def async_setup_entry(
         'add_alarm'
     )
 
+    platform.async_register_entity_service(
+        'set_powerwake',
+        {
+            vol.Optional('state'): cv.boolean,
+            vol.Optional('delta'): cv.positive_int,
+        },
+        'set_powerwake'
+    )
+
 class SomneoAlarmToggle(SomneoEntity, SwitchEntity):
     _attr_icon = ALARMS_ICON
     _attr_should_poll = True
@@ -122,6 +131,10 @@ class SomneoAlarmToggle(SomneoEntity, SwitchEntity):
     async def add_alarm(self):
         """Function to add alarm to list in wake-up app"""
         await self.coordinator.async_add_alarm(self._alarm)
+
+    async def set_powerwake(self, state: bool, delta: int = 10):
+        """Adjust the powerwake settings of an alarm."""
+        await self.coordinator.async_set_powerwake(self._alarm, state, delta = delta)
 
 class SomneoPowerWakeToggle(SomneoEntity, SwitchEntity):
     _attr_icon = PW_ICON

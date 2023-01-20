@@ -141,3 +141,43 @@ remove_alarm:
     entity:
       integration: somneo
       domain: switch
+
+set_powerwake:
+  name: Set PowerWake
+  description: Set PowerWake for an alarm.
+  target:
+    entity:
+      integration: somneo
+      domain: switch
+  fields:
+    state:
+      # Field name as shown in UI
+      name: State
+      description: Turn PowerWake on or off.
+      # Whether or not field is required (default = false)
+      required: true
+      # Example value that can be passed for this field
+      example: on
+      # The default field value
+      default: on
+      # Selector
+      selector:
+        options:
+          - on
+          - off
+    delta:
+      # Field name as shown in UI
+      name: Delta
+      description: Delta in minutes to set PowerWake to.
+      # Whether or not field is required (default = false)
+      required: true
+      # Example value that can be passed for this field
+      example: 10
+      # The default field value
+      default: 10
+      # Selector
+      selector:
+        number:
+          min: 0
+          max: 59
+          step: 1

@@ -81,7 +81,7 @@ class SomneoTime(SomneoEntity, NumberEntity):
         elif self._type == HOURS:
             await self.coordinator.async_set_alarm(self._alarm, hours = int(value))
         elif self._type == PW_DELTA:
-            await self.coordinator.async_set_powerwake(self._alarm, delta = int(value))
+            await self.coordinator.async_set_powerwake(self._alarm, state = bool(value), delta = int(value))
 
 
 class SomneoSnooze(SomneoEntity, NumberEntity):
